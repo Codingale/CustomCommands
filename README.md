@@ -3,9 +3,9 @@
 Custom ULX commands. Currently reworking...
 
 ## Credits
-
-| cobalt77   | Original author  | https://github.com/cobalt77/Custom-ULX-Commands |
+|Name        |                  | Github link                                     |
 |------------|------------------|-------------------------------------------------|
+| cobalt77   | Original author  | https://github.com/cobalt77/Custom-ULX-Commands |
 | iViscosity | Modified version | https://github.com/iViscosity/Custom-Commands   |
 
 ## Requirements
