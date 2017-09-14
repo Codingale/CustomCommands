@@ -1,0 +1,7 @@
+"AddonInfo"
+{
+        "name"              "CustomCommands"
+        "author_email"      ""
+        "info"              "A collection of ULX commands"
+        "override"          "0"
+}
