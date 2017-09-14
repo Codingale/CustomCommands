@@ -1,6 +1,8 @@
 "AddonInfo"
 {
         "name"              "CustomCommands"
+        "version"           "1.0"
+        "author_name"       "Codingale"
         "author_email"      ""
         "info"              "A collection of ULX commands"
         "override"          "0"
