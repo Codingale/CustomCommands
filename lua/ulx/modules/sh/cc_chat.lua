@@ -135,13 +135,6 @@ if SERVER then
 	end )
 
 end
-ulx_csay_color_table = { "black", "white", "red", "blue", "green", "orange", "purple", "pink", "gray", "yellow" }
-
-local csaycolor = ulx.command( "Chat", "ulx csaycolor", ulx.csaycolor, {"!csaycolor", "!ccolor"}, true, true )
-csaycolor:addParam{ type=ULib.cmds.StringArg, hint="message" }
-csaycolor:addParam{ type=ULib.cmds.StringArg, hint="color", completes=ulx_csay_color_table, ULib.cmds.restrictToCompletes } -- only allows values in that table
-csaycolor:defaultAccess( ULib.ACCESS_SUPERADMIN )
-csaycolor:help( "Send a message to everyone in the center of their screen with color." )
 
 notification_types_table = { "generic", "error", "undo", "hint", "cleanup", "progress" }
 
