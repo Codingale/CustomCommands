@@ -4,6 +4,6 @@ function ulx.soundlist( calling_ply )
 		calling_ply:ConCommand( "menu_sounds" )
 	end
 end
-local soundlist = ulx.command( "Fun", "ulx soundlist", ulx.soundlist, { "!soundlist", "!sounds", "!sound" } )
-soundlist:defaultAccess( ULib.ACCESS_ALL )
+local soundlist = ulx.command( "Fun", "ulx soundlist", ulx.soundlist, { "!soundlist" } )
+soundlist:defaultAccess( ULib.ACCESS_SUPERADMIN )
 soundlist:help( "Open the server soundlist" )

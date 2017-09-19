@@ -95,7 +95,7 @@ end
 local tsaycolor = ulx.command( "Chat", "ulx tsaycolor", ulx.tsaycolor, "!color", true, true )
 tsaycolor:addParam{ type=ULib.cmds.StringArg, hint="message" }
 tsaycolor:addParam{ type=ULib.cmds.StringArg, hint="color", completes=ulx_tsay_color_table, ULib.cmds.restrictToCompletes } -- only allows values in that table
-tsaycolor:defaultAccess( ULib.ACCESS_ADMIN )
+tsaycolor:defaultAccess( ULib.ACCESS_SUPERADMIN )
 tsaycolor:help( "Send a message to everyone in the chat box with color." )
 
 function ulx.lowercase( calling_ply, target_ply, should_lower ) 
@@ -116,7 +116,7 @@ end
 local lower = ulx.command( "Chat", "ulx lower", ulx.lowercase, "!lower" )
 lower:addParam{ type=ULib.cmds.PlayerArg }
 lower:addParam{ type=ULib.cmds.BoolArg, invisible=true }
-lower:defaultAccess( ULib.ACCESS_OPERATOR )
+lower:defaultAccess( ULib.ACCESS_SUPERADMIN )
 lower:help( "Forces all text sent to be set to lower-case." )
 lower:setOpposite( "ulx unlower", { _, _, false }, "!unlower" )
 
@@ -135,166 +135,12 @@ if SERVER then
 	end )
 
 end
---[[
-local seesasayAccess = "ulx seesasay"
-
-if SERVER then ULib.ucl.registerAccess( seesasayAccess, ULib.ACCESS_SUPERADMIN, "Ability to see 'ulx sasay'", "Other" ) end
-
-function ulx.sasay( calling_ply, message ) -- Dsay
-
-	local format
-	
-	local me = "/me "
-	
-	if message:sub( 1, me:len() ) == me then
-	
-		format = "(SUPERADMINS) *** #P #s"
-		
-		message = message:sub( me:len() + 1 )
-		
-	else
-	
-		format = "#P to superadmins: #s"
-		
-	end
-
-	local players = player.GetAll()
-	
-	for i=#players, 1, -1 do
-	
-		local v = players[ i ]
-		
-		if not ULib.ucl.query( v, seesasayAccess ) and v ~= calling_ply then 
-		
-			table.remove( players, i )
-			
-		end
-		
-	end
-
-	ulx.fancyLog( players, format, calling_ply, message )
-	
-end
-local sasay = ulx.command( "Chat", "ulx sasay", ulx.sasay, "$", true, true )
-sasay:addParam{ type=ULib.cmds.StringArg, hint="message", ULib.cmds.takeRestOfLine }
-sasay:defaultAccess( ULib.ACCESS_ALL )
-sasay:help( "Send a message to currently connected superadmins." )
-]]
 ulx_csay_color_table = { "black", "white", "red", "blue", "green", "orange", "purple", "pink", "gray", "yellow" }
 
-local seedsayAccess = "ulx seedsay"
-if SERVER then ULib.ucl.registerAccess( seedsayAccess, { ULib.ACCESS_OPERATOR }, "Ability to see 'ulx dsay'", "Other" ) end -- Give operators access to see dsays echoes by default
-
-function ulx.dsay( calling_ply, message )
-
-	local format = "#P to Donors: #s"
-	
-	local players = player.GetAll()
-	for i=#players, 1, -1 do
-
-		local v = players[ i ]
-
-		if not ULib.ucl.query( v, seedsayAccess ) and v ~= calling_ply then 
-
-			table.remove( players, i )
-
-		end
-
-	end
-
-	ulx.fancyLog( players, format, calling_ply, message )
-
-end
-local dsay = ulx.command( "Chat", "ulx dsay", ulx.dsay, "$", true, true )
-dsay:addParam{ type=ULib.cmds.StringArg, hint="message", ULib.cmds.takeRestOfLine }
-dsay:defaultAccess( ULib.ACCESS_OPERATOR )
-dsay:help( "Send a message to currently connected donators." )
-
-function ulx.csaycolor( calling_ply, message, color )
-	
-		local pink = Color( 255, 0, 97 )
-		
-		local white = Color( 255, 255, 255 )
-		
-		local black = Color( 0, 0, 0 )
-		
-		local red = Color( 255, 0, 0 )
-		
-		local blue = Color( 0, 0, 255 )
-		
-		local green = Color( 0, 255, 0 )
-		
-		local orange = Color( 255, 127, 0 )
-		
-		local purple = Color( 51, 0, 102 )
-		
-		local gray = Color( 96, 96, 96 )
-		
-		local grey = Color( 96, 96, 96 )
-		
-		local maroon = Color( 128, 0, 0 )
-		
-		local yellow = Color( 255, 255, 0 )
-	
-	if color == "pink" then
-	
-		ULib.csay( nil, message, pink )
-	
-	elseif color == "white" then
-	
-		ULib.csay( nil, message, white )
-
-	elseif color == "black" then
-	
-		ULib.csay( nil, message, black )
-	
-	elseif color == "red" then
-	
-		ULib.csay( nil, message, red )
-
-	elseif color == "blue" then
-	
-		ULib.csay( nil, message, blue )
-	
-	elseif color == "green" then
-	
-		ULib.csay( nil, message, green )
-
-	elseif color == "orange" then
-	
-		ULib.csay( nil, message, orange )
-	
-	elseif color == "purple" then
-	
-		ULib.csay( nil, message, purple )
-
-	elseif color == "gray" then
-	
-		ULib.csay( nil, message, gray )
-	
-	elseif color == "grey" then
-	
-		ULib.csay( nil, message, grey )
-
-	elseif color == "maroon" then
-	
-		ULib.csay( nil, message, maroon )
-	
-	elseif color == "yellow" then
-	
-		ULib.csay( nil, message, yellow )	
-
-	elseif color == "color" then
-	
-		ULib.csay( nil, message )
-		
-	end
-	
-end
 local csaycolor = ulx.command( "Chat", "ulx csaycolor", ulx.csaycolor, {"!csaycolor", "!ccolor"}, true, true )
 csaycolor:addParam{ type=ULib.cmds.StringArg, hint="message" }
 csaycolor:addParam{ type=ULib.cmds.StringArg, hint="color", completes=ulx_csay_color_table, ULib.cmds.restrictToCompletes } -- only allows values in that table
-csaycolor:defaultAccess( ULib.ACCESS_ADMIN )
+csaycolor:defaultAccess( ULib.ACCESS_SUPERADMIN )
 csaycolor:help( "Send a message to everyone in the center of their screen with color." )
 
 notification_types_table = { "generic", "error", "undo", "hint", "cleanup", "progress" }
@@ -387,5 +233,5 @@ notifications:addParam{ type=ULib.cmds.PlayersArg }
 notifications:addParam{ type=ULib.cmds.StringArg, hint="text" }
 notifications:addParam{ type=ULib.cmds.StringArg, hint="type", completes=notification_types_table, ULib.cmds.restrictToCompletes }
 notifications:addParam{ type=ULib.cmds.NumArg, default=5, min=1, max=120, hint="duration", ULib.cmds.optional }
-notifications:defaultAccess( ULib.ACCESS_ADMIN )
+notifications:defaultAccess( ULib.ACCESS_SUPERADMIN )
 notifications:help( "Send a sandbox-type notification to players." )

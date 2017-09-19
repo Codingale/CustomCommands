@@ -41,6 +41,7 @@ function ulx.gom( calling_ply )
 	ulx.fancyLog( { calling_ply }, "Gagged: #s", gags )
 	
 end
+
 local gom = ulx.command( "Chat", "ulx gom", ulx.gom, "!gom" )
-gom:defaultAccess( ULib.ACCESS_OPERATOR )
+gom:defaultAccess( ULib.ACCESS_SUPERADMIN )
 gom:help( "Returns a list of gagged and muted players." )

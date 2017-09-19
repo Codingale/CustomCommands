@@ -5,5 +5,5 @@ function ulx.notepad( calling_ply )
 	end
 end
 local notepad = ulx.command( "Fun", "ulx notepad", ulx.notepad, { "!notepad", "!notes", "!note" } )
-notepad:defaultAccess( ULib.ACCESS_ADMIN )
+notepad:defaultAccess( ULib.ACCESS_SUPERADMIN )
 notepad:help( "Open the admin note" )

@@ -59,7 +59,7 @@ function ulx.explode( calling_ply, target_plys )
 end
 local explode = ulx.command( "Fun", "ulx explode", ulx.explode, "!explode" )
 explode:addParam{ type=ULib.cmds.PlayersArg }
-explode:defaultAccess( ULib.ACCESS_ADMIN )
+explode:defaultAccess( ULib.ACCESS_SUPERADMIN )
 explode:help( "Explode a player" )
 
 
@@ -76,7 +76,7 @@ function ulx.launch( calling_ply, target_plys )
 end
 local launch = ulx.command( "Fun", "ulx launch", ulx.launch, "!launch" )
 launch:addParam{ type=ULib.cmds.PlayersArg }
-launch:defaultAccess( ULib.ACCESS_ADMIN )
+launch:defaultAccess( ULib.ACCESS_SUPERADMIN )
 launch:help( "Launch players into the air." )
 
 
@@ -184,7 +184,7 @@ end
 local model = ulx.command( "Fun", "ulx model", ulx.model, "!model" )
 model:addParam{ type=ULib.cmds.PlayersArg }
 model:addParam{ type=ULib.cmds.StringArg, hint="model" }
-model:defaultAccess( ULib.ACCESS_ADMIN )
+model:defaultAccess( ULib.ACCESS_SUPERADMIN )
 model:help( "Set a player's model." )
 
 function ulx.jumppower( calling_ply, target_plys, power )
@@ -209,7 +209,7 @@ end
 local jumppower = ulx.command( "Fun", "ulx jumppower", ulx.jumppower, "!jumppower" )
 jumppower:addParam{ type=ULib.cmds.PlayersArg }
 jumppower:addParam{ type=ULib.cmds.NumArg, default=200, hint="power", ULib.cmds.optional }
-jumppower:defaultAccess( ULib.ACCESS_ADMIN )
+jumppower:defaultAccess( ULib.ACCESS_SUPERADMIN )
 jumppower:help( "Set a player's jump power.\nDefault=200" )
 
 function ulx.frags_deaths( calling_ply, target_plys, number, should_deaths )
@@ -241,7 +241,7 @@ local frags_deaths = ulx.command( "Fun", "ulx frags", ulx.frags_deaths, "!frags"
 frags_deaths:addParam{ type=ULib.cmds.PlayersArg }
 frags_deaths:addParam{ type=ULib.cmds.NumArg, hint="number" }
 frags_deaths:addParam{ type=ULib.cmds.BoolArg, invisible=true }
-frags_deaths:defaultAccess( ULib.ACCESS_ADMIN )
+frags_deaths:defaultAccess( ULib.ACCESS_SUPERADMIN )
 frags_deaths:help( "Set a player's frags and deaths." )
 frags_deaths:setOpposite( "ulx deaths", { _, _, _, true }, "!deaths" )
 
@@ -274,7 +274,7 @@ local ammo = ulx.command( "Fun", "ulx giveammo", ulx.ammo, "!giveammo" )
 ammo:addParam{ type=ULib.cmds.PlayersArg }
 ammo:addParam{ type=ULib.cmds.NumArg, min=0, hint="amount" }
 ammo:addParam{ type=ULib.cmds.BoolArg, invisible=true }
-ammo:defaultAccess( ULib.ACCESS_ADMIN )
+ammo:defaultAccess( ULib.ACCESS_SUPERADMIN )
 ammo:help( "Set a player's ammo" )
 ammo:setOpposite( "ulx setammo", { _, _, _, true }, "!setammo" )
 
@@ -292,7 +292,7 @@ end
 local scale = ulx.command( "Fun", "ulx scale", ulx.scale, "!scale" )
 scale:addParam{ type=ULib.cmds.PlayersArg }
 scale:addParam{ type=ULib.cmds.NumArg, default=1, min=0, hint="multiplier" }
-scale:defaultAccess( ULib.ACCESS_ADMIN )
+scale:defaultAccess( ULib.ACCESS_SUPERADMIN )
 scale:help( "Set the model scale of a player." )
 
 local zaptable = {
@@ -344,7 +344,7 @@ end
 local shock = ulx.command( "Fun", "ulx shock", ulx.shock, "!shock" )
 shock:addParam{ type=ULib.cmds.PlayersArg }
 shock:addParam{ type=ULib.cmds.NumArg, min=0, hint="damage", ULib.cmds.optional }
-shock:defaultAccess( ULib.ACCESS_ADMIN )
+shock:defaultAccess( ULib.ACCESS_SUPERADMIN )
 shock:help( "Shock players" )
 
 if ( CLIENT ) then
@@ -562,6 +562,7 @@ function ulx.resetdata( calling_ply, target_ply )
 	ulx.fancyLogAdmin( calling_ply, true, "#A reset data for #T", target_ply )
 	
 end
+
 local resetdata = ulx.command( "Utility", "ulx resetdata", ulx.resetdata )
 resetdata:addParam{ type=ULib.cmds.PlayerArg }
 resetdata:help( "Reset easter egg data." )

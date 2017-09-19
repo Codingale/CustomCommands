@@ -41,37 +41,15 @@ local give = ulx.command( "Utility", "ulx give", ulx.give, "!give" )
 give:addParam{ type=ULib.cmds.PlayersArg }
 give:addParam{ type=ULib.cmds.StringArg, hint="entity" }
 give:addParam{ type=ULib.cmds.BoolArg, invisible=true }
-give:defaultAccess( ULib.ACCESS_ADMIN )
+give:defaultAccess( ULib.ACCESS_SUPERADMIN )
 give:help( "Give a player an entity" )
 give:setOpposite ( "ulx sgive", { _, _, _, true }, "!sgive", true )
-
-function ulx.afk( calling_ply, should_afk )
-	
-	if should_afk then
-		
-		calling_ply:ConCommand( "ttt_spectator_mode 1" )
-		ulx.fancyLog( { calling_ply }, "You went AFK by using '!afk'. Please use '!unafk' to return." )
-		ulx.fancyLogAdmin( calling_ply, "#A went AFK by typing '!afk'." )
-		
-	else
-		
-		calling_ply:ConCommand( "ttt_spectator_mode 0" )
-		ulx.fancyLogAdmin( calling_ply, "#A returned from being AFK by typing '!afk'." )
-		
-	end
-	
-end
-local afk = ulx.command( "Utility", "ulx afk", ulx.afk, "!afk", true )
-afk:addParam{ type=ULib.cmds.BoolArg, invisible=true }
-afk:setOpposite( "ulx unafk", { _, false }, "!unafk", true )
-afk:defaultAccess( ULib.ACCESS_ALL )
-afk:help( "Sets yourself into Spectator mode." )
 
 function ulx.maprestart( calling_ply )
 
     timer.Simple( 1, function() -- Wait 1 second so players can see the log
 	
-		game.ConsoleCommand( "changelevel " .. game.GetMap() .. "\n" ) 
+		RunConsoleCommand("changelevel", game.GetMap()) 
 		
 	end ) 
 	
@@ -135,7 +113,7 @@ local multiban = ulx.command( "Utility", "ulx multiban", ulx.multiban )
 multiban:addParam{ type=ULib.cmds.PlayersArg }
 multiban:addParam{ type=ULib.cmds.NumArg, hint="minutes, 0 for perma", ULib.cmds.optional, ULib.cmds.allowTimeString, min=0 }
 multiban:addParam{ type=ULib.cmds.StringArg, hint="reason", ULib.cmds.optional, ULib.cmds.takeRestOfLine, completes=ulx.common_kick_reasons }
-multiban:defaultAccess( ULib.ACCESS_ADMIN )
+multiban:defaultAccess( ULib.ACCESS_SUPERADMIN )
 multiban:help( "Bans multiple targets." )
 
 if ( CLIENT ) then
@@ -201,7 +179,7 @@ function ulx.thirdperson( calling_ply )
 
 end
 local thirdperson = ulx.command( "Utility", "ulx thirdperson", ulx.thirdperson, {"!thirdperson", "!3p"}, true )
-thirdperson:defaultAccess( ULib.ACCESS_ALL )
+thirdperson:defaultAccess( ULib.ACCESS_SUPERADMIN )
 thirdperson:help( "Toggles third person mode" )
 
 end -- end serverside
@@ -227,7 +205,7 @@ local timedcmd = ulx.command( "Utility", "ulx timedcmd", ulx.timedcmd, "!timedcm
 timedcmd:addParam{ type=ULib.cmds.StringArg, hint="command" }
 timedcmd:addParam{ type=ULib.cmds.NumArg, min=1, hint="seconds", ULib.cmds.round }
 timedcmd:addParam{ type=ULib.cmds.BoolArg, invisible=true }
-timedcmd:defaultAccess( ULib.ACCESS_ADMIN )
+timedcmd:defaultAccess( ULib.ACCESS_SUPERADMIN )
 timedcmd:help( "Runs the specified command after a number of seconds." )
 
 --cancel the active timed command--
@@ -242,7 +220,7 @@ function ulx.cancelcmd( calling_ply )
 end
 local cancelcmd = ulx.command( "Utility", "ulx cancelcmd", ulx.cancelcmd, "!cancelcmd", true )
 cancelcmd:addParam{ type=ULib.cmds.BoolArg, invisible=true }
-cancelcmd:defaultAccess( ULib.ACCESS_ADMIN )
+cancelcmd:defaultAccess( ULib.ACCESS_SUPERADMIN )
 cancelcmd:help( "Runs the specified command after a number of seconds." )
 
 function ulx.cleardecals( calling_ply )
@@ -257,7 +235,7 @@ function ulx.cleardecals( calling_ply )
 	
 end
 local cleardecals = ulx.command( "Utility", "ulx cleardecals", ulx.cleardecals, "!cleardecals" )
-cleardecals:defaultAccess( ULib.ACCESS_ADMIN )
+cleardecals:defaultAccess( ULib.ACCESS_SUPERADMIN )
 cleardecals:help( "Clear decals for all players." )
 
 function ulx.resetmap( calling_ply )
@@ -327,7 +305,7 @@ end
 local bot = ulx.command( "Utility", "ulx bot", ulx.bot, "!bot" )
 bot:addParam{ type=ULib.cmds.NumArg, default=0, hint="number", ULib.cmds.optional }
 bot:addParam{ type=ULib.cmds.BoolArg, invisible=true }
-bot:defaultAccess( ULib.ACCESS_ADMIN )
+bot:defaultAccess( ULib.ACCESS_SUPERADMIN )
 bot:help( "Spawn or remove bots." )
 bot:setOpposite( "ulx kickbots", { _, _, true }, "!kickbots" )
 
@@ -459,7 +437,7 @@ sban:addParam{ type=ULib.cmds.PlayerArg }
 sban:addParam{ type=ULib.cmds.NumArg, hint="minutes, 0 for perma", ULib.cmds.optional, ULib.cmds.allowTimeString, min=0 }
 sban:addParam{ type=ULib.cmds.StringArg, hint="reason", ULib.cmds.optional, ULib.cmds.takeRestOfLine, completes=ulx.common_kick_reasons }
 sban:addParam{ type=ULib.cmds.BoolArg, invisible=true }
-sban:defaultAccess( ULib.ACCESS_ADMIN )
+sban:defaultAccess( ULib.ACCESS_SUPERADMIN )
 sban:help( "Bans target silently." )
 
 function ulx.fakeban( calling_ply, target_ply, minutes, reason )
@@ -497,7 +475,7 @@ end
 local profile = ulx.command( "Utility", "ulx profile", ulx.profile, "!profile", true )
 profile:addParam{ type=ULib.cmds.PlayerArg }
 profile:addParam{ type=ULib.cmds.BoolArg, invisible=true }
-profile:defaultAccess( ULib.ACCESS_ALL )
+profile:defaultAccess( ULib.ACCESS_SUPERADMIN )
 profile:help( "Opens target's profile" )
 
 function ulx.dban( calling_ply )
@@ -505,7 +483,7 @@ function ulx.dban( calling_ply )
 	calling_ply:ConCommand( "menu_disc" )
 end
 local dban = ulx.command( "Utility", "ulx dban", ulx.dban, "!dban" )
-dban:defaultAccess( ULib.ACCESS_ADMIN )
+dban:defaultAccess( ULib.ACCESS_SUPERADMIN )
 dban:help( "Open the disconnected players menu" )
 
 CreateConVar( "ulx_hide_notify_superadmins", 0 )
@@ -615,7 +593,7 @@ function ulx.enter( calling_ply, target_ply )
 end
 local enter = ulx.command( "Utility", "ulx enter", ulx.enter, "!enter")
 enter:addParam{ type=ULib.cmds.PlayerArg }
-enter:defaultAccess( ULib.ACCESS_ADMIN )
+enter:defaultAccess( ULib.ACCESS_SUPERADMIN )
 enter:help( "Force a player into a vehicle." )
 
 function ulx.exit( calling_ply, target_ply )
@@ -632,7 +610,7 @@ function ulx.exit( calling_ply, target_ply )
 end
 local exit = ulx.command( "Utility", "ulx exit", ulx.exit, "!exit")
 exit:addParam{ type=ULib.cmds.PlayerArg }
-exit:defaultAccess( ULib.ACCESS_ADMIN )
+exit:defaultAccess( ULib.ACCESS_SUPERADMIN )
 exit:help( "Force a player out of a vehicle." )
 
 function ulx.forcerespawn( calling_ply, target_plys )
@@ -662,7 +640,7 @@ function ulx.forcerespawn( calling_ply, target_plys )
 end
 local forcerespawn = ulx.command( "Utility", "ulx forcerespawn", ulx.forcerespawn, { "!forcerespawn", "!frespawn"} )
 forcerespawn:addParam{ type=ULib.cmds.PlayersArg }
-forcerespawn:defaultAccess( ULib.ACCESS_ADMIN )
+forcerespawn:defaultAccess( ULib.ACCESS_SUPERADMIN )
 forcerespawn:help( "Force-respawn a player." )
 
 function ulx.serverinfo( calling_ply )
@@ -744,7 +722,7 @@ function ulx.serverinfo( calling_ply )
 	
 end
 local serverinfo = ulx.command( "Utility", "ulx serverinfo", ulx.serverinfo, { "!serverinfo", "!info" } )
-serverinfo:defaultAccess( ULib.ACCESS_ADMIN )
+serverinfo:defaultAccess( ULib.ACCESS_SUPERADMIN )
 serverinfo:help( "Print server information." )
 
 function ulx.timescale( calling_ply, number, should_reset )
@@ -801,7 +779,7 @@ function ulx.removeragdolls( calling_ply )
 	
 end
 local removeragdolls = ulx.command( "Utility", "ulx removeragdolls", ulx.removeragdolls, "!removeragdolls" )
-removeragdolls:defaultAccess( ULib.ACCESS_ADMIN )
+removeragdolls:defaultAccess( ULib.ACCESS_SUPERADMIN )
 removeragdolls:help( "Remove all ragdolls." )
 
 function ulx.bancheck( calling_ply, steamid )
@@ -856,7 +834,7 @@ function ulx.bancheck( calling_ply, steamid )
 end
 local bancheck = ulx.command( "Utility", "ulx bancheck", ulx.bancheck, "!bancheck" )
 bancheck:addParam{ type=ULib.cmds.StringArg, hint="string" }
-bancheck:defaultAccess( ULib.ACCESS_ADMIN )
+bancheck:defaultAccess( ULib.ACCESS_SUPERADMIN )
 bancheck:help( "Checks if a steamid or ip address is banned." )
 
 if ( SERVER ) then
@@ -898,7 +876,7 @@ function ulx.friends( calling_ply, target_ply )
 end
 local friends = ulx.command( "Utility", "ulx friends", ulx.friends, { "!friends", "!listfriends" }, true )
 friends:addParam{ type=ULib.cmds.PlayerArg }
-friends:defaultAccess( ULib.ACCESS_ADMIN )
+friends:defaultAccess( ULib.ACCESS_SUPERADMIN )
 friends:help( "Print a player's connected steam friends." )
 
 if ( CLIENT ) then
@@ -1058,7 +1036,7 @@ local watch = ulx.command( "Utility", "ulx watch", ulx.watch, "!watch", true )
 watch:addParam{ type=ULib.cmds.PlayerArg }
 watch:addParam{ type=ULib.cmds.StringArg, hint="reason", ULib.cmds.takeRestOfLine }
 watch:addParam{ type=ULib.cmds.BoolArg, invisible=true }
-watch:defaultAccess( ULib.ACCESS_ADMIN )
+watch:defaultAccess( ULib.ACCESS_SUPERADMIN )
 watch:help( "Watch or unwatch a player" )
 watch:setOpposite( "ulx unwatch", { _, _, false, true }, "!unwatch", true )
 
@@ -1071,7 +1049,7 @@ function ulx.watchlist( calling_ply )
 	
 end
 local watchlist = ulx.command( "Utility", "ulx watchlist", ulx.watchlist, "!watchlist", true )
-watchlist:defaultAccess( ULib.ACCESS_ADMIN )
+watchlist:defaultAccess( ULib.ACCESS_SUPERADMIN )
 watchlist:help( "View the watchlist" )
 
 if ( CLIENT ) then

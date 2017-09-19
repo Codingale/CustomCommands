@@ -32,7 +32,7 @@ end
 local pgag = ulx.command( "Chat", "ulx pgag", ulx.pgag, "!pgag" )
 pgag:addParam{ type=ULib.cmds.PlayersArg }
 pgag:addParam{ type=ULib.cmds.BoolArg, invisible=true }
-pgag:defaultAccess( ULib.ACCESS_ADMIN )
+pgag:defaultAccess( ULib.ACCESS_SUPERADMIN )
 pgag:help( "Gag target(s), disables microphone using pdata." )
 pgag:setOpposite( "ulx unpgag", { _, _, true }, "!unpgag" )
 
@@ -107,5 +107,5 @@ function ulx.printpgags( calling_ply )
 	
 end
 local printpgags = ulx.command( "Chat", "ulx printpgags", ulx.printpgags, "!printpgags", true )
-printpgags:defaultAccess( ULib.ACCESS_ADMIN )
+printpgags:defaultAccess( ULib.ACCESS_SUPERADMIN )
 printpgags:help( "Prints players who are pgagged." )

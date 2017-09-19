@@ -2,7 +2,7 @@
 --  This file holds the chat tags  --
 -------------------------------------
 --[[
-/* This is disabled by default as it competes with other chat tags. Remove line 4 and the last line to enable. */
+-- This is disabled by default as it competes with other chat tags. Remove line 4 and the last line to enable.
 if ( SERVER ) then
 
 	AddCSLuaFile( )
