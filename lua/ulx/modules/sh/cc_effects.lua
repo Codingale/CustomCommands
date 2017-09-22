@@ -1,70 +1,70 @@
 local ulx_trailtable = {
-"trails/tube.vmt",
-"trails/electric.vmt",
-"trails/smoke.vmt",
-"trails/plasma.vmt",
-"trails/lol.vmt",
-"trails/physbeam.vmt",
-"trails/laser.vmt",
-"trails/love.vmt"
+	"trails/tube.vmt",
+	"trails/electric.vmt",
+	"trails/smoke.vmt",
+	"trails/plasma.vmt",
+	"trails/lol.vmt",
+	"trails/physbeam.vmt",
+	"trails/laser.vmt",
+	"trails/love.vmt",
 }
 
 local ulx_trail_color_table = {  
-"black",
-"white", 
-"red", 
-"blue", 
-"green", 
-"orange", 
-"purple", 
-"pink", 
-"gray", 
-"maroon", 
-"yellow" 
+	"black",
+	"white", 
+	"red", 
+	"blue", 
+	"green", 
+	"orange", 
+	"purple", 
+	"pink", 
+	"gray", 
+	"maroon", 
+	"yellow",
 }
 
 local ulx_materialtable = {
-"models/wireframe",
-"debug/env_cubemap_model",
-"models/shadertest/shader3",
-"models/shadertest/shader4",
-"models/shadertest/shader5",
-"models/shiny",
-"models/debug/debugwhite",
-"Models/effects/comball_sphere",
-"Models/effects/comball_tape",
-"Models/effects/splodearc_sheet",
-"Models/effects/vol_light001",
-"models/props_combine/stasisshield_sheet",
-"models/props_combine/portalball001_sheet",
-"models/props_combine/com_shield001a",
-"models/props_c17/frostedglass_01a",
-"models/props_lab/Tank_Glass001",
-"models/props_combine/tprings_globe",
-"models/rendertarget",
-"models/screenspace",
-"brick/brick_model",
-"models/props_pipes/GutterMetal01a",
-"models/props_pipes/Pipesystem01a_skin3",
-"models/props_wasteland/wood_fence01a",
-"models/props_foliage/tree_deciduous_01a_trunk",
-"models/props_c17/FurnitureFabric003a",
-"models/props_c17/FurnitureMetal001a",
-"models/props_c17/paper01",
-"models/flesh",
-"phoenix_storms/metalset_1-2",
-"phoenix_storms/metalfloor_2-3",
-"phoenix_storms/plastic",
-"phoenix_storms/wood",
-"phoenix_storms/bluemetal",
-"phoenix_storms/cube",
-"phoenix_storms/dome",
-"phoenix_storms/gear",
-"phoenix_storms/stripes",
-"phoenix_storms/wire/pcb_green",
-"phoenix_storms/wire/pcb_red",
-"phoenix_storms/wire/pcb_blue",
-"hunter/myplastic"
+	"models/wireframe",
+	"debug/env_cubemap_model",
+	"models/shadertest/shader3",
+	"models/shadertest/shader4",
+	"models/shadertest/shader5",
+	"models/shiny",
+	"models/debug/debugwhite",
+	"Models/effects/comball_sphere",
+	"Models/effects/comball_tape",
+	"Models/effects/splodearc_sheet",
+	"Models/effects/vol_light001",
+	"models/props_combine/stasisshield_sheet",
+	"models/props_combine/portalball001_sheet",
+	"models/props_combine/com_shield001a",
+	"models/props_c17/frostedglass_01a",
+	"models/props_lab/Tank_Glass001",
+	"models/props_combine/tprings_globe",
+	"models/rendertarget",
+	"models/screenspace",
+	"brick/brick_model",
+	"models/props_pipes/GutterMetal01a",
+	"models/props_pipes/Pipesystem01a_skin3",
+	"models/props_wasteland/wood_fence01a",
+	"models/props_foliage/tree_deciduous_01a_trunk",
+	"models/props_c17/FurnitureFabric003a",
+	"models/props_c17/FurnitureMetal001a",
+	"models/props_c17/paper01",
+	"models/flesh",
+	"phoenix_storms/metalset_1-2",
+	"phoenix_storms/metalfloor_2-3",
+	"phoenix_storms/plastic",
+	"phoenix_storms/wood",
+	"phoenix_storms/bluemetal",
+	"phoenix_storms/cube",
+	"phoenix_storms/dome",
+	"phoenix_storms/gear",
+	"phoenix_storms/stripes",
+	"phoenix_storms/wire/pcb_green",
+	"phoenix_storms/wire/pcb_red",
+	"phoenix_storms/wire/pcb_blue",
+	"hunter/myplastic",
 }
 
 local trailtab = {}
@@ -123,6 +123,7 @@ function ulx.trail( calling_ply, target_plys, color, startWidth, endWidth, lifeT
 	
 	end
 end
+
 local trail = ulx.command( "Fun", "ulx trail", ulx.trail, "!trail" )
 trail:addParam{ type=ULib.cmds.PlayersArg }
 trail:addParam{ type=ULib.cmds.StringArg, hint="color", completes=ulx_trail_color_table, ULib.cmds.restrictToCompletes }
@@ -131,7 +132,7 @@ trail:addParam{ type=ULib.cmds.NumArg, default=0, hint="End Width" }
 trail:addParam{ type=ULib.cmds.NumArg, default=5, hint="Length" }
 trail:addParam{ type=ULib.cmds.StringArg, hint="type", completes=ulx_trailtable, ULib.cmds.restrictToCompletes }
 trail:addParam{ type=ULib.cmds.BoolArg, invisible=true }
-trail:defaultAccess( ULib.ACCESS_ADMIN )
+trail:defaultAccess( ULib.ACCESS_SUPERADMIN )
 trail:help( "Add trails on players." )
 trail:setOpposite( "ulx removetrail", { _, _, _, _, _, _, _, true }, "!removetrail" )
 
@@ -156,10 +157,11 @@ function ulx.material( calling_ply, target_plys, material, should_reset )
 	end
 	
 end
+
 local material = ulx.command( "Fun", "ulx material", ulx.material, "!material" )
 material:addParam{ type=ULib.cmds.PlayersArg }
 material:addParam{ type=ULib.cmds.StringArg, hint="material", completes=ulx_materialtable, ULib.cmds.restrictToCompletes }
-material:defaultAccess( ULib.ACCESS_ADMIN )
+material:defaultAccess( ULib.ACCESS_SUPERADMIN )
 material:addParam{ type=ULib.cmds.BoolArg, invisible=true }
 material:help( "Set a player's material." )
 material:setOpposite( "ulx resetmaterial", { _, _, _, true }, "!resetmaterial" )
@@ -211,10 +213,11 @@ function ulx.color( calling_ply, target_plys, color, should_reset )
 	end
 	
 end
+
 local color = ulx.command( "Fun", "ulx color", ulx.color, "!setcolor" )
 color:addParam{ type=ULib.cmds.PlayersArg }
 color:addParam{ type=ULib.cmds.StringArg, hint="color", completes=ulx_trail_color_table, ULib.cmds.restrictToCompletes }
 color:addParam{ type=ULib.cmds.BoolArg, invisible=true }
-color:defaultAccess( ULib.ACCESS_ADMIN )
+color:defaultAccess( ULib.ACCESS_SUPERADMIN )
 color:help( "Add trails on players." )
 color:setOpposite( "ulx resetcolor", { _, _, _, true }, "!resetcolor" )

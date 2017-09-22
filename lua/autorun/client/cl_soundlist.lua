@@ -2,9 +2,10 @@
 local soundsTable = {}
 	
 -- add usergroups to the blacklist so that they can't open the menu
+-- TODO: figure out why they'd restrict this...
 local blockedGroups = {
-"example_group",
-"example_group2"
+	"example_group",
+	"example_group2",
 }
 
 function OpenPanelSounds( ply, cmd, args, str )

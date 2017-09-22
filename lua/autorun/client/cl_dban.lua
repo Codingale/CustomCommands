@@ -1,5 +1,4 @@
-
-local SetClipboardText = SetClipboardText -- #420LocalizeIt
+local SetClipboardText = SetClipboardText
 
 local disconnectTable = {}
 
@@ -158,7 +157,7 @@ function OpenPanelZZ4Z( ply, cmd, args, str )
 		
 		if ply:IsAdmin() then
 			menu:AddOption( "Whois", function()
-				gui.OpenURL("http://whois.net/ip-address-lookup/".. tostring( list:GetLine( line ):GetValue( 3 ) ) )
+				gui.OpenURL("http://".. tostring( list:GetLine( line ):GetValue( 3 ) ) .. '.ipaddress.com/' )
 			end ):SetIcon("icon16/zoom.png")
 		end
 		

@@ -93,10 +93,10 @@ end
 local votegag = ulx.command( "Voting", "ulx votegag", ulx.votegag, "!votegag" )
 votegag:addParam{ type=ULib.cmds.PlayerArg }
 votegag:addParam{ type=ULib.cmds.NumArg, min=0, default=3, hint="minutes", ULib.cmds.allowTimeString, ULib.cmds.optional }
-votegag:defaultAccess( ULib.ACCESS_ALL )
+votegag:defaultAccess( ULib.ACCESS_SUPERADMIN )
 votegag:help( "Starts a public vote gag against target." )
-if SERVER then ulx.convar( "votegagSuccessratio", "0.7", _, ULib.ACCESS_ADMIN ) end
-if SERVER then ulx.convar( "votegagMinvotes", "3", _, ULib.ACCESS_ADMIN ) end
+if SERVER then ulx.convar( "votegagSuccessratio", "0.7", _, ULib.ACCESS_SUPERADMIN ) end
+if SERVER then ulx.convar( "votegagMinvotes", "3", _, ULib.ACCESS_SUPERADMIN ) end
 
 timer.Create( "votegagtimer", 60, 0, function()
 
@@ -104,7 +104,7 @@ timer.Create( "votegagtimer", 60, 0, function()
 		
 		local gag = v:GetPData( "votegagged" )
 
-		if ( gag and gag != "0") then
+		if ( gag and gag ~= "0") then
 			
 			if ( not v.cc_voting_votegagged ) then
 				v.cc_voting_votegagged = true
@@ -152,14 +152,14 @@ function ulx.unvotegag( calling_ply, target_plys )
 end
 local unvotegag = ulx.command( "Voting", "ulx unvotegag", ulx.unvotegag, "!unvotegag" )
 unvotegag:addParam{ type=ULib.cmds.PlayersArg }
-unvotegag:defaultAccess( ULib.ACCESS_ADMIN )
+unvotegag:defaultAccess( ULib.ACCESS_SUPERADMIN )
 unvotegag:help( "Ungag the player" )
 
 local function ulxvotegaghook( listener, talker )
 	
 	local gag = talker.cc_voting_votegagged
 
-	if ( gag and gag != 0 and gag != "0" ) then
+	if ( gag and gag ~= 0 and gag ~= "0" ) then
 
 		return false
 		
@@ -262,9 +262,9 @@ end
 local votemute = ulx.command( "Voting", "ulx votemute", ulx.votemute, "!votemute" )
 votemute:addParam{ type=ULib.cmds.PlayerArg }
 votemute:addParam{ type=ULib.cmds.NumArg, min=0, default=3, hint="minutes", ULib.cmds.allowTimeString, ULib.cmds.optional }
-votemute:defaultAccess( ULib.ACCESS_ALL )
+votemute:defaultAccess( ULib.ACCESS_SUPERADMIN )
 votemute:help( "Starts a public vote mute against target." )
-if SERVER then ulx.convar( "votemuteSuccessratio", "0.7", _, ULib.ACCESS_ADMIN ) ulx.convar( "votemuteMinvotes", "3", _, ULib.ACCESS_ADMIN ) end
+if SERVER then ulx.convar( "votemuteSuccessratio", "0.7", _, ULib.ACCESS_SUPERADMIN ) ulx.convar( "votemuteMinvotes", "3", _, ULib.ACCESS_SUPERADMIN ) end
 
 timer.Create( "votemutetimer", 60, 0, function()
 
@@ -315,7 +315,7 @@ function ulx.unvotemute( calling_ply, target_plys )
 end
 local unvotemute = ulx.command( "Voting", "ulx unvotemute", ulx.unvotemute, "!unvotemute" )
 unvotemute:addParam{ type=ULib.cmds.PlayersArg }
-unvotemute:defaultAccess( ULib.ACCESS_ADMIN )
+unvotemute:defaultAccess( ULib.ACCESS_SUPERADMIN )
 unvotemute:help( "Unmute the player" )
 
 local function ulxvotemutehook( ply )

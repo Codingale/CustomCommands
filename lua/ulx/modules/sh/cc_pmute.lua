@@ -31,7 +31,7 @@ end
 local pmute = ulx.command( "Chat", "ulx pmute", ulx.pmute, "!pmute" )
 pmute:addParam{ type=ULib.cmds.PlayersArg }
 pmute:addParam{ type=ULib.cmds.BoolArg, invisible=true }
-pmute:defaultAccess( ULib.ACCESS_ADMIN )
+pmute:defaultAccess( ULib.ACCESS_SUPERADMIN )
 pmute:help( "Mute target(s), disables chat using pdata." )
 pmute:setOpposite( "ulx unpmute", { _, _, true }, "!unpmute" )
 
@@ -107,5 +107,5 @@ function ulx.printpmutes( calling_ply )
 	
 end
 local printpmutes = ulx.command( "Chat", "ulx printpmutes", ulx.printpmutes, "!printpmutes", true )
-printpmutes:defaultAccess( ULib.ACCESS_ADMIN )
+printpmutes:defaultAccess( ULib.ACCESS_SUPERADMIN )
 printpmutes:help( "Prints players who are pmuted." )
