@@ -194,7 +194,8 @@ function ulx.timedcmd( calling_ply, command, seconds, should_cancel )
 	
 	end)
 
-	timer.Create( "halftime", ( seconds/2 ), 1, function() -- Print to the chat when half the time is left
+	timer.Create( "halftime", ( seconds/2 ), 1, function() 
+        -- Print to the chat when half the time is left
 
 		ULib.tsay( calling_ply, ( seconds/2 ) .. " seconds left" )	
 	
@@ -313,7 +314,7 @@ function ulx.banip( calling_ply, minutes, ip )
 
 	if not ULib.isValidIP( ip ) then
 	
-		ULib.tsayError( calling_ply, "Invalid ip address." )
+		ULib.tsayError( calling_ply, "Invalid IP address." )
 		
 		return
 		
