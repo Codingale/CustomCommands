@@ -36,7 +36,7 @@ pmute:help( "Mute target(s), disables chat using pdata." )
 pmute:setOpposite( "ulx unpmute", { _, _, true }, "!unpmute" )
 
 function pmuteHook( text, team, listener, speaker )
-
+    if not IsValid(speaker) then return end -- console
 	if speaker:GetPData( "permmuted" ) == "true" then
 	
 		-- ULib.tsayError( speaker, "You are permanently muted and cannot speak, please ask an Admin (@) to unpmute you." )
