@@ -92,7 +92,7 @@ function ulx.tsaycolor( calling_ply, message, color )
 	end
 	
 end
-local tsaycolor = ulx.command( "Chat", "ulx tsaycolor", ulx.tsaycolor, "!color", true, true )
+local tsaycolor = ulx.command( "Chat", "ulx tsaycolor", ulx.tsaycolor, "!tsaycolor", true, true )
 tsaycolor:addParam{ type=ULib.cmds.StringArg, hint="message" }
 tsaycolor:addParam{ type=ULib.cmds.StringArg, hint="color", completes=ulx_tsay_color_table, ULib.cmds.restrictToCompletes } -- only allows values in that table
 tsaycolor:defaultAccess( ULib.ACCESS_SUPERADMIN )
