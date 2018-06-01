@@ -845,7 +845,7 @@ if ( SERVER ) then
 
 	net.Receive( "steamid2", function( len, ply )
 		local id2 = net.ReadString()
-		local tab = ULib.bans[ id2 ]
+		local tab = ULib.bans[ id2 ] or { ["Message"] = "Not banned" }
 		net.Start( "sendtable" )
 			net.WriteTable( tab )
 		net.Send( ply )			
